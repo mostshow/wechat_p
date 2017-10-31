@@ -2,6 +2,7 @@
 import _ from 'lodash'
 import tools from '../common/tools'
 import crypto from 'crypto'
+import getWebToken from '../common/getWebToken'
 
 export default {
 
@@ -19,10 +20,27 @@ export default {
         if(signature == scyptoString){
             res.end(echostr);
             console.log("Confirm and send echo back");
+            console.log(echostr);
         }else {
             res.end('Failed');
             console.log("Failed!");
         }
+    },
+    //?code=CODE&state=STATE。
+    userInfo(req, res, next){
+        let code = req.query.code;
+        let state = req.query.state;
+        console.log(state)
+        getWebToken(code).then(function(err, body){
+            if(err){
+                console.log(err)
+                res.end('Failed2');
+            }else{
+                res.end(body);
+
+            }
+
+        })
     }
 }
 

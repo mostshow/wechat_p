@@ -1,6 +1,7 @@
+
 'use strict';
-const request = require('request');
-const qs = require('querystring');
+import qs from 'querystring'
+import request from 'request'
 
 function getUserInfo(AccessToken, openId) {
   let reqUrl = 'https://api.weixin.qq.com/sns/userinfo?';
